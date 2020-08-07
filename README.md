@@ -6,3 +6,5 @@
 
 - Estruturação do banco de dados
 - Configuração da estrutura MVC
+- Detecção e encaminhamentos de login.
+- Tela de Login.
