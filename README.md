@@ -14,3 +14,10 @@
 #### 10:49
 
 - Pagina de Cadastro
+
+### 09/08/2020 
+
+#### 22:56
+
+- Pagina Home
+- Correcção de Bugs

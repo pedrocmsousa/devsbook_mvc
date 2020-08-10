@@ -17,12 +17,15 @@ class LoginHandler {
                 $loggedUser->id = $data['id'];
                 $loggedUser->email = $data['email'];
                 $loggedUser->name = $data['name'];
+                $loggedUser->avatar = $data['avatar'];
 
-                return $loggedUser;
+                return $loggedUser;                
             } 
         }
+
         return false;
     }
+    
 
     public static function verifyLogin($email, $password)
     {
