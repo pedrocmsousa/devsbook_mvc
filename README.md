@@ -21,3 +21,4 @@
 
 - Pagina Home
 - Correcção de Bugs
+- Feed-Editor e Feed-New
