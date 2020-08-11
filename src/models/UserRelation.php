@@ -1,8 +1,8 @@
 <?php
 namespace src\models;
 
-use \core\Model;
+use core\Model;
 
-class UserRelation extends Model {
-
+class UserRelation extends Model
+{
 }

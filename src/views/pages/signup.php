@@ -4,18 +4,18 @@
     <meta charset="utf-8" />
     <title>Cadastro - Devsbook</title>
     <meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1"/>
-    <link rel="stylesheet" href="<?=$base;?>/assets/css/login.css" />
+    <link rel="stylesheet" href="<?= $base ?>/assets/css/login.css" />
 </head>
 <body>
     <header>
         <div class="container">
-            <a href=""><img src="<?=$base;?>/assets/images/devsbook_logo.png" /></a>
+            <a href=""><img src="<?= $base ?>/assets/images/devsbook_logo.png" /></a>
         </div>
     </header>
     <section class="container main">
-        <form method="POST" action="<?=$base;?>/cadastro">
-            <?php if(!empty($flash)): ?>
-                <div class="flash"><?= $flash; ?></div>
+        <form method="POST" action="<?= $base ?>/cadastro">
+            <?php if (!empty($flash)): ?>
+                <div class="flash"><?= $flash ?></div>
             <?php endif; ?>
 
             <input placeholder="Digite seu Nome Completo" class="input" type="text" name="name" />
@@ -28,10 +28,10 @@
 
             <input class="button" type="submit" value="Fazer cadastro" />
 
-            <a href="<?=$base;?>/login">Já tem conta? Faça o login</a>
+            <a href="<?= $base ?>/login">Já tem conta? Faça o login</a>
         </form>
     </section>
-    <script src="<?=$base?>/assets/js/imask.js"></script>
+    <script src="<?= $base ?>/assets/js/imask.js"></script>
     <script>
         IMask(
             document.getElementById('birthdate'),

@@ -1,30 +1,35 @@
 <?= $render('header', [
-    'loggedUser' => $loggedUser
-]); ?>
+    'loggedUser' => $loggedUser,
+]) ?>
 <section class="container main">
-    <?= $render('sidebar'); ?>
+<?= $render('sidebar', [
+    'activeMenu' => 'home',
+]) ?>
     <section class="feed mt-10">
 
         <div class="row">
             <div class="column pr-5">
 
                 <?= $render('feed-editor', [
-                    'user'=>$loggedUser
-                ]); ?>
+                    'user' => $loggedUser,
+                ]) ?>
 
-                <?php foreach($feed['posts'] as $feedItem): ?>
+                <?php foreach ($feed['posts'] as $feedItem): ?>
                     
                     <?= $render('feed-item', [
                         'data' => $feedItem,
-                        'loggedUser' => $loggedUser
-                    ]); ?>
+                        'loggedUser' => $loggedUser,
+                    ]) ?>
 
                 <?php endforeach; ?>
 
                 <div class="feed-pagination">               
-                    <?php for($q=0;$q<$feed['pageCount'];$q++): ?>
+                    <?php for ($q = 0; $q < $feed['pageCount']; $q++): ?>
                     
-                        <a class="<?=($q==$feed['currentPage']?'active':'');?>" href="<?=$base;?>/?page=<?=$q;?>"><?=$q+1;?></a>
+                        <a class="<?= $q == $feed['currentPage']
+                            ? 'active'
+                            : '' ?>" href="<?= $base ?>/?page=<?= $q ?>"><?= $q +
+    1 ?></a>
 
                     <?php endfor; ?>   
                 </div>        
@@ -40,8 +45,8 @@
                         </div>
                     </div>
                     <div class="box-body">
-                        <a href=""><img src="<?=$base?>/media/fullstack.jpg" /></a>
-                        <a href=""><img src="<?=$base?>/media/javascript.jpg" /></a>
+                        <a href=""><img src="<?= $base ?>/media/fullstack.jpg" /></a>
+                        <a href=""><img src="<?= $base ?>/media/javascript.jpg" /></a>
                     </div>
                 </div>
                 <div class="box">
@@ -54,4 +59,4 @@
 
     </section>
 </section>
-<?= $render('footer'); ?>
+<?= $render('footer') ?>
