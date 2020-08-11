@@ -22,3 +22,11 @@
 - Pagina Home
 - Correcção de Bugs
 - Feed-Editor e Feed-New
+
+### 10/08/2020
+
+#### 22:15 
+
+- Feed-Editor configurado
+- Feed configurado e dinamico
+- Paginação efetuada
