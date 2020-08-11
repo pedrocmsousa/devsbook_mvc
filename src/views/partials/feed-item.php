@@ -2,7 +2,7 @@
     <div class="box-body">
         <div class="feed-item-head row mt-20 m-width-20">
             <div class="feed-item-head-photo">
-                <a href=""><img src="media/avatars/avatar.jpg" /></a>
+                <a href=""><img src="<?=$base?>/media/avatars/avatar.jpg" /></a>
             </div>
             <div class="feed-item-head-info">
                 <a href=""><span class="fidi-name">Bonieky Lacerda</span></a>
@@ -11,7 +11,7 @@
                 <span class="fidi-date">07/03/2020</span>
             </div>
             <div class="feed-item-head-btn">
-                <img src="assets/images/more.png" />
+                <img src="<?=$base?>/assets/images/more.png" />
             </div>
         </div>
         <div class="feed-item-body mt-10 m-width-20">
@@ -27,7 +27,7 @@
 
             <div class="fic-item row m-height-10 m-width-20">
                 <div class="fic-item-photo">
-                    <a href=""><img src="media/avatars/avatar.jpg" /></a>
+                    <a href=""><img src="<?=$base?>/media/avatars/avatar.jpg" /></a>
                 </div>
                 <div class="fic-item-info">
                     <a href="">Bonieky Lacerda</a>
@@ -36,7 +36,7 @@
             </div>
             <div class="fic-item row m-height-10 m-width-20">
                 <div class="fic-item-photo">
-                    <a href=""><img src="media/avatars/avatar.jpg" /></a>
+                    <a href=""><img src="<?=$base?>/media/avatars/avatar.jpg" /></a>
                 </div>
                 <div class="fic-item-info">
                     <a href="">Bonieky Lacerda</a>
@@ -46,7 +46,7 @@
 
             <div class="fic-answer row m-height-10 m-width-20">
                 <div class="fic-item-photo">
-                    <a href=""><img src="media/avatars/avatar.jpg" /></a>
+                    <a href=""><img src="<?=$base?>/media/avatars/avatar.jpg" /></a>
                 </div>
                 <input type="text" class="fic-item-field" placeholder="Escreva um comentário" />
             </div>
