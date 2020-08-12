@@ -64,6 +64,13 @@ class UserHandler
         return $user ? true : false;
     }
 
+    /**
+     * Pegar o usuario
+     *
+     * @param [type] $id
+     * @param boolean $full
+     * @return $user
+     */
     public static function getUser($id, $full = false)
     {
         $data = User::select()
@@ -90,7 +97,7 @@ class UserHandler
                     ->get();
                 foreach ($followers as $follower) {
                     $userData = User::select()
-                        ->where('id', $follower['user_form'])
+                        ->where('id', $follower['user_from'])
                         ->one();
 
                     $newUser = new User();
@@ -137,5 +144,34 @@ class UserHandler
             'birthdate' => $birthdate,
             'token' => $token,
         ])->execute();
+    }
+
+    public static function isFollowing($from, $to)
+    {
+        $data = UserRelation::select()
+            ->where('user_from', $from)
+            ->where('user_to', $to)
+            ->one();
+
+        if ($data) {
+            return true;
+        }
+        return false;
+    }
+
+    public static function follow($from, $to)
+    {
+        UserRelation::insert([
+            'user_from' => $from,
+            'user_to' => $to,
+        ])->execute();
+    }
+
+    public static function unfollow($from, $to)
+    {
+        UserRelation::delete()
+            ->where('user_from', $from)
+            ->where('user_to', $to)
+            ->execute();
     }
 }
