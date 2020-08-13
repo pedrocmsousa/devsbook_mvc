@@ -6,16 +6,19 @@
     ->avatar ?>" /></a>
             </div>
             <div class="feed-item-head-info">
-                <a href=""><span class="fidi-name"><?= $data->user
-                    ->name ?></span></a>
-                <span class="fidi-action"><?php switch ($data->type) {
-                    case 'text':
-                        echo 'fez um post';
-                        break;
-                    case 'photo':
-                        echo 'postou uma foto';
-                        break;
-                } ?></span>
+                <a href="<?= $base ?>/profile/<?= $data->user->id ?>">
+                    <span class="fidi-name">
+                        <?= $data->user->name ?>
+                    </span></a>
+                <span class="fidi-action">
+                    <?php switch ($data->type) {
+                        case 'text':
+                            echo 'fez um post';
+                            break;
+                        case 'photo':
+                            echo 'postou uma foto';
+                            break;
+                    } ?></span>
                 <br />
                 <span class="fidi-date"><?= date(
                     'd/m/Y H:i',

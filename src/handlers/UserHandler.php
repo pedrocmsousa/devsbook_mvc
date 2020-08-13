@@ -1,4 +1,5 @@
 <?php
+
 namespace src\handlers;
 
 use src\models\User;
@@ -64,13 +65,6 @@ class UserHandler
         return $user ? true : false;
     }
 
-    /**
-     * Pegar o usuario
-     *
-     * @param [type] $id
-     * @param boolean $full
-     * @return $user
-     */
     public static function getUser($id, $full = false)
     {
         $data = User::select()
@@ -81,6 +75,7 @@ class UserHandler
             $user = new User();
             $user->id = $data['id'];
             $user->name = $data['name'];
+            $user->email = $data['email'];
             $user->birthdate = $data['birthdate'];
             $user->city = $data['city'];
             $user->work = $data['work'];
@@ -173,5 +168,58 @@ class UserHandler
             ->where('user_from', $from)
             ->where('user_to', $to)
             ->execute();
+    }
+
+    public static function searchUser($term)
+    {
+        $users = [];
+
+        $data = User::select()
+            ->where('name', 'like', '%' . $term . '%')
+            ->get();
+
+        if ($data) {
+            foreach ($data as $user) {
+                $newUser = new User();
+                $newUser->id = $user['id'];
+                $newUser->name = $user['name'];
+                $newUser->avatar = $user['avatar'];
+
+                $users[] = $newUser;
+            }
+        }
+        return $users;
+    }
+
+    public static function updateUser($id, $name, $email, $birthdate, $city, $work)
+    {
+        $user = User::select()
+            ->where('id', $id)
+            ->one();
+
+        if ($user) {
+            User::update()
+                ->set('name', $name)
+                ->set('email', $email)
+                ->set('birthdate', $birthdate)
+                ->set('city', $city)
+                ->set('work', $work)
+                ->where('id', $id)
+                ->execute();
+        }
+    }
+
+    public static function updatePassword($id, $password)
+    {
+        $user = User::select()
+            ->where('id', $id)
+            ->one();
+        $hash = password_hash($password, PASSWORD_DEFAULT);
+        if ($hash) {
+            User::update()
+                ->set('password', $hash)
+                ->where('id', $id)
+                ->execute();
+        }
     }
 }

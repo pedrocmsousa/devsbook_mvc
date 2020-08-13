@@ -4,9 +4,8 @@ namespace src\controllers;
 
 use core\Controller;
 use src\handlers\UserHandler;
-use src\handlers\PostHandler;
 
-class HomeController extends Controller
+class SearchController extends Controller
 {
     private $loggedUser;
 
@@ -19,15 +18,20 @@ class HomeController extends Controller
         }
     }
 
-    public function index()
+    public function index($atts = [])
     {
-        $page = intval(filter_input(INPUT_GET, 'page'));
+        $searchTerm = filter_input(INPUT_GET, 's');
 
-        $feed = PostHandler::getHomeFeed($this->loggedUser->id, $page);
+        if (empty($searchTerm)) {
+            $this->redirect('/');
+        }
 
-        $this->render('home', [
+        $users = UserHandler::searchUser($searchTerm);
+
+        $this->render('search', [
             'loggedUser' => $this->loggedUser,
-            'feed' => $feed,
+            'searchTerm' => $searchTerm,
+            'users' => $users
         ]);
     }
 }

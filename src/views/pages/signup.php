@@ -14,7 +14,7 @@
     </header>
     <section class="container main">
         <form method="POST" action="<?= $base ?>/cadastro">
-            <?php if (!empty($flash)): ?>
+            <?php if (!empty($flash)) : ?>
                 <div class="flash"><?= $flash ?></div>
             <?php endif; ?>
 
@@ -24,7 +24,8 @@
 
             <input placeholder="Digite sua Senha" class="input" type="password" name="password" />
 
-            <input placeholder="Digite sua Data de Nascimento" class="input" type="text" name="birthdate" id="birthdate" />
+            <input placeholder="Digite sua Data de Nascimento" 
+            class="input" type="text" name="birthdate" id="birthdate" />
 
             <input class="button" type="submit" value="Fazer cadastro" />
 
