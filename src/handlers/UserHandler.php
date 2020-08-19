@@ -191,7 +191,7 @@ class UserHandler
         return $users;
     }
 
-    public static function updateUser($id, $name, $email, $birthdate, $city, $work)
+    public static function updateUser($id, $name, $email, $birthdate, $city, $work, $avatar, $cover)
     {
         $user = User::select()
             ->where('id', $id)
@@ -204,6 +204,8 @@ class UserHandler
                 ->set('birthdate', $birthdate)
                 ->set('city', $city)
                 ->set('work', $work)
+                ->set('avatar', $avatar)
+                ->set('cover', $cover)
                 ->where('id', $id)
                 ->execute();
         }

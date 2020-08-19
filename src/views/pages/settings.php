@@ -11,11 +11,18 @@
         <div class="row">
             <div class="column pr-5">
                 <h1>Configurações</h1>
-                <form class="form-config" method="POST" action="<?= $base; ?>/settings">
-                    <label>Novo Avatar</label>
-                    <input class="file" type="file" name="avatar" />
-                    <label>Nova Capa</label>
-                    <input class="file" type="file" name="cover" />
+                <form class="form-config" method="POST" enctype="multipart/form-data" action="<?= $base; ?>/settings">
+                    <label>
+                        Novo Avatar
+                        <input class="file" type="file" name="avatar" /><br/>
+                        <img class="image-edit" src="<?= $base; ?>/media/avatars/<?= $user->avatar ?>" alt="">
+                    </label>
+                    <label>
+                        Nova Capa
+                        <input class="file" type="file" name="cover" /><br/>
+                        <img class="image-edit" src="<?= $base; ?>/media/covers/<?= $user->cover ?>" alt="">
+                    </label>
+                    
                     <div class="hr"></div>
                     <?php if (!empty($flash)) : ?>
                         <div class="flash"><?php echo $flash; ?></div>

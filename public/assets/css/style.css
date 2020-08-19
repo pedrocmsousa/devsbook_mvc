@@ -493,6 +493,10 @@ div .hr {
     margin-bottom: 5px;
 }
 
+.form-config .image-edit {
+    max-width: 150px;
+}
+
 @media (max-width: 992px) {
     header .head-side-right {
         display: none !important;

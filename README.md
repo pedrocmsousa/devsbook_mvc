@@ -49,9 +49,15 @@
 -   Terminando o processo de follow de perfil
 -   Pagina de amigos concluida
 
-### 21:20 
+#### 21:20 
 
 -   Correcção de Bug de Follow.
 -   Partial do Profile
 -   Search
 -   Settings só faltando a parte de troca de Avatar/Cover
+
+### 13/08/2020
+
+#### 22:00
+
+-   Efetuada a funcionalidade de troca de Avatar/Cover
