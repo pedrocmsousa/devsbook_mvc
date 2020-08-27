@@ -61,3 +61,12 @@
 #### 22:00
 
 -   Efetuada a funcionalidade de troca de Avatar/Cover
+
+### 27/08/2020
+
+#### 08:53
+
+- Funcionalidade de like atraves de ajax configurada.
+- Funcionalidade de like pegando o count do banco configurada
+- Colocado Favicon na pagina.
+- Inserida a opção de salvar o like/deslike no post.
