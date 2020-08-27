@@ -56,6 +56,7 @@ CREATE TABLE `postlikes` (
 
 CREATE TABLE `posts` (
   `id` int(11) NOT NULL,
+  `id_user` int(11) NOT NULL,
   `type` varchar(20) NOT NULL,
   `created_at` datetime NOT NULL,
   `body` text NOT NULL

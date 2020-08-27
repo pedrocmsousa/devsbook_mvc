@@ -30,4 +30,5 @@ $router->get('/logout', 'LoginController@logout');
 $router->get('/settings', 'SettingsController@setup');
 $router->post('/settings', 'SettingsController@setupAction');
 
-$router->get('/ajax/like/{id}', 'AjaxControler@like');
+$router->get('/ajax/like/{id}', 'AjaxController@like');
+$router->post('/ajax/comment', 'AjaxController@comment');

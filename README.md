@@ -70,3 +70,8 @@
 - Funcionalidade de like pegando o count do banco configurada
 - Colocado Favicon na pagina.
 - Inserida a opção de salvar o like/deslike no post.
+
+#### 11:27 
+
+- Feita a integração dos comentarios com o banco de dados.
+- Funcionalidade de comentarios atraves de ajax configurada.
