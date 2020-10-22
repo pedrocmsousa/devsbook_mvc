@@ -191,37 +191,21 @@ class UserHandler
         return $users;
     }
 
-    public static function updateUser($id, $name, $email, $birthdate, $city, $work, $avatar, $cover)
-    {
-        $user = User::select()
-            ->where('id', $id)
-            ->one();
+    public static function updateUser($fields, $idUser) {
+        if(count($fields) > 0) {
 
-        if ($user) {
-            User::update()
-                ->set('name', $name)
-                ->set('email', $email)
-                ->set('birthdate', $birthdate)
-                ->set('city', $city)
-                ->set('work', $work)
-                ->set('avatar', $avatar)
-                ->set('cover', $cover)
-                ->where('id', $id)
-                ->execute();
-        }
-    }
+            $update = User::update();
 
-    public static function updatePassword($id, $password)
-    {
-        $user = User::select()
-            ->where('id', $id)
-            ->one();
-        $hash = password_hash($password, PASSWORD_DEFAULT);
-        if ($hash) {
-            User::update()
-                ->set('password', $hash)
-                ->where('id', $id)
-                ->execute();
+            foreach($fields as $fieldName => $fieldValue) {
+                if($fieldName == 'password') {
+                    $fieldValue = password_hash($fieldValue, PASSWORD_DEFAULT);
+                }
+
+                $update->set($fieldName, $fieldValue);
+            }
+
+            $update->where('id', $idUser)->execute();
+
         }
     }
 }
