@@ -30,42 +30,42 @@
 
                     <input placeholder="<?= $user->id ?>" type="hidden" name="id" />
 
-                    <label>Nome Completo:</label>
-                    <input class="input" placeholder="<?= $user->name ?>" type="text" name="name" />
-                    <label>Data de Nascimento:</label>
-                    <input class="input" id="birthdate" placeholder="<?= date(
-                        'd/m/Y',
-                        strtotime($user->birthdate)
-                    ); ?>" type="text" name="birthdate" />
-                    <label>E-mail:</label>
-                    <input class="input" placeholder="<?= $user->email ?>" type="email" name="email" />
-                    <?php if (($user->city) != "") : ?>
-                        <label>Cidade:</label>
-                        <input class="input" placeholder="<?= $user->city ?>" type="text" name="city" />
-                    <?php else : ?>
-                        <label>Cidade:</label>
-                        <input class="input" placeholder="Qual a sua cidade?" placeholder="<?= $user->city ?>" 
-                        type="text" name="city" />
-                    <?php endif; ?>
+                    <label>
+                        Nome Completo:
+                        <input class="input" type="text" value="<?= $user->name ?>" name="name" />
+                    </label>
 
-                    <?php if (($user->work) != "") : ?>
-                        <label>Trabalho:</label>
-                        <input class="input" placeholder="<?= $user->work ?>" type="text" name="work" />
+                    <label>
+                        Data de nascimento:
+                        <input class="input" type="text" name="birthdate" value="<?=date('d/m/Y', strtotime($user->birthdate));?>" />
+                    </label>
 
-                    <?php else : ?>
-                        <label>Trabalho:</label>
-                        <input class="input" placeholder="Onde você trabalha?" placeholder="<?= $user->work ?> 
-                        " type="text" name="work" />
+                    <label>
+                        E-mail:
+                        <input class="input" type="email" name="email" value="<?=$user->email;?>" />
+                    </label>
 
-                    <?php endif; ?>
+                    <label>
+                        Cidade:
+                        <input class="input" type="text" name="city" value="<?=$user->city;?>" />
+                    </label>
+
+                    <label>
+                        Trabalho:
+                        <input class="input" type="text" name="work" value="<?=$user->work;?>" />
+                    </label>
+        
                     <div class="hr"></div>
-                    <label>Nova senha:</label>
-                    <input class="input" id="password" 
-                    placeholder="Caso queira alterar sua senha, digite a nova senha." type="password" name="password" />
 
-                    <label>Confirmar senha:</label>
-                    <input class="input" id="password1" 
-                    placeholder="Repita a senha para confirmar" type="password" name="password1" />
+                    <label>
+                        Nova Senha:
+                        <input class="input" type="password" name="password" />
+                    </label>
+
+                    <label>
+                        Confirmar Nova Senha:
+                        <input class="input" type="password" name="password_confirm" />
+                    </label>
                     <div class="hr"></div>
                     <input class="button" type="submit" value="Salvar" />
                 </form>
