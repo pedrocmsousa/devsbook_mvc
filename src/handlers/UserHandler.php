@@ -1,25 +1,21 @@
 <?php
-
 namespace src\handlers;
 
-use src\models\User;
-use src\models\UserRelation;
-use src\handlers\PostHandler;
+use \src\models\User;
+use \src\models\UserRelation;
+use \src\handlers\PostHandler;
 
-class UserHandler
-{
-    public static function checkLogin()
-    {
-        if (!empty($_SESSION['token'])) {
+class UserHandler {
+
+    public static function checkLogin() {
+        if(!empty($_SESSION['token'])) {
             $token = $_SESSION['token'];
 
-            $data = User::select()
-                ->where('token', $token)
-                ->one();
-            if (count($data) > 0) {
+            $data = User::select()->where('token', $token)->one();
+            if(count($data) > 0) {
+
                 $loggedUser = new User();
                 $loggedUser->id = $data['id'];
-                $loggedUser->email = $data['email'];
                 $loggedUser->name = $data['name'];
                 $loggedUser->avatar = $data['avatar'];
 
@@ -30,48 +26,39 @@ class UserHandler
         return false;
     }
 
-    public static function verifyLogin($email, $password)
-    {
-        $user = User::select()
-            ->where('email', $email)
-            ->one();
+    public static function verifyLogin($email, $password) {
+        $user = User::select()->where('email', $email)->one();
 
-        if ($user) {
-            if (password_verify($password, $user['password'])) {
-                $token = md5(time() . rand(0, 9999) . time());
+        if($user) {
+            if(password_verify($password, $user['password'])) {
+                $token = md5(time().rand(0,9999).time());
+
                 User::update()
                     ->set('token', $token)
                     ->where('email', $email)
-                    ->execute();
+                ->execute();
+
                 return $token;
             }
         }
+
         return false;
     }
 
-    public static function idExists($id)
-    {
-        $user = User::select()
-            ->where('id', $id)
-            ->one();
+    public function idExists($id) {
+        $user = User::select()->where('id', $id)->one();
         return $user ? true : false;
     }
 
-    public static function emailExists($email)
-    {
-        $user = User::select()
-            ->where('email', $email)
-            ->one();
+    public function emailExists($email) {
+        $user = User::select()->where('email', $email)->one();
         return $user ? true : false;
     }
 
-    public static function getUser($id, $full = false)
-    {
-        $data = User::select()
-            ->where('id', $id)
-            ->one();
+    public function getUser($id, $full = false) {
+        $data = User::select()->where('id', $id)->one();
 
-        if ($data) {
+        if($data) {
             $user = new User();
             $user->id = $data['id'];
             $user->name = $data['name'];
@@ -82,19 +69,16 @@ class UserHandler
             $user->avatar = $data['avatar'];
             $user->cover = $data['cover'];
 
-            if ($full) {
+            if($full) {
                 $user->followers = [];
                 $user->following = [];
                 $user->photos = [];
 
-                $followers = UserRelation::select()
-                    ->where('user_to', $id)
-                    ->get();
-                foreach ($followers as $follower) {
-                    $userData = User::select()
-                        ->where('id', $follower['user_from'])
-                        ->one();
-
+                // followers
+                $followers = UserRelation::select()->where('user_to', $id)->get();
+                foreach($followers as $follower) {
+                    $userData = User::select()->where('id', $follower['user_from'])->one();
+                    
                     $newUser = new User();
                     $newUser->id = $userData['id'];
                     $newUser->name = $userData['name'];
@@ -103,14 +87,11 @@ class UserHandler
                     $user->followers[] = $newUser;
                 }
 
-                $following = UserRelation::select()
-                    ->where('user_from', $id)
-                    ->get();
-                foreach ($following as $follower) {
-                    $userData = User::select()
-                        ->where('id', $follower['user_to'])
-                        ->one();
-
+                // following
+                $following = UserRelation::select()->where('user_from', $id)->get();
+                foreach($following as $follower) {
+                    $userData = User::select()->where('id', $follower['user_to'])->one();
+                    
                     $newUser = new User();
                     $newUser->id = $userData['id'];
                     $newUser->name = $userData['name'];
@@ -118,7 +99,10 @@ class UserHandler
 
                     $user->following[] = $newUser;
                 }
+
+                // photos
                 $user->photos = PostHandler::getPhotosFrom($id);
+
             }
 
             return $user;
@@ -127,67 +111,65 @@ class UserHandler
         return false;
     }
 
-    public static function addUser($name, $email, $password, $birthdate)
-    {
+    public function addUser($name, $email, $password, $birthdate) {
         $hash = password_hash($password, PASSWORD_DEFAULT);
-        $token = md5(time() . rand(0, 9999) . time());
+        $token = md5(time().rand(0,9999).time());
 
         User::insert([
             'email' => $email,
             'password' => $hash,
             'name' => $name,
             'birthdate' => $birthdate,
-            'token' => $token,
+            'token' => $token
         ])->execute();
+
+        return $token;
     }
 
-    public static function isFollowing($from, $to)
-    {
+    public static function isFollowing($from, $to) {
         $data = UserRelation::select()
             ->where('user_from', $from)
             ->where('user_to', $to)
-            ->one();
+        ->one();
 
-        if ($data) {
+        if($data) {
             return true;
         }
         return false;
     }
 
-    public static function follow($from, $to)
-    {
+    public static function follow($from, $to) {
         UserRelation::insert([
             'user_from' => $from,
-            'user_to' => $to,
+            'user_to' => $to
         ])->execute();
     }
 
-    public static function unfollow($from, $to)
-    {
+    public static function unfollow($from, $to) {
         UserRelation::delete()
             ->where('user_from', $from)
             ->where('user_to', $to)
-            ->execute();
+        ->execute();
     }
 
-    public static function searchUser($term)
-    {
+    public static function searchUser($term) {
         $users = [];
 
-        $data = User::select()
-            ->where('name', 'like', '%' . $term . '%')
-            ->get();
+        $data = User::select()->where('name', 'like', '%'.$term.'%')->get();
 
-        if ($data) {
-            foreach ($data as $user) {
+        if($data) {
+            foreach($data as $user) {
+
                 $newUser = new User();
                 $newUser->id = $user['id'];
                 $newUser->name = $user['name'];
                 $newUser->avatar = $user['avatar'];
 
                 $users[] = $newUser;
+
             }
         }
+
         return $users;
     }
 
@@ -208,4 +190,5 @@ class UserHandler
 
         }
     }
+
 }
