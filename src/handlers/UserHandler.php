@@ -55,7 +55,7 @@ class UserHandler {
         return $user ? true : false;
     }
 
-    public function getUser($id, $full = false) {
+    public static function getUser($id, $full = false) {
         $data = User::select()->where('id', $id)->one();
 
         if($data) {
